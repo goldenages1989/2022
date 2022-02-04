@@ -593,3 +593,4 @@ github_poster jike --jike_cookie "your jike cookie" --jike_user_id "your jike us
 
 # 赞赏
 谢谢就够了
+# 2022
