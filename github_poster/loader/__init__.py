@@ -25,30 +25,15 @@ from github_poster.loader.wakatime_loader import WakaTimeLoader
 from github_poster.loader.youtube_loader import YouTubeLoader
 
 LOADER_DICT = {
-    "bbdc": BBDCLoader,
-    "duolingo": DuolingoLoader,
-    "shanbay": ShanBayLoader,
-    "strava": StravaLoader,
-    "cichang": CiChangLoader,
-    "ns": NSLoader,
     "gpx": GPXLoader,
     "issue": GitHubIssuesLoader,
-    "leetcode": LeetcodeLoader,
-    "twitter": TwitterLoader,
-    "youtube": YouTubeLoader,
     "bilibili": BilibiliLoader,
     "github": GitHubLoader,
-    "gitlab": GitLabLoader,
     "kindle": KindleLoader,
     "wakatime": WakaTimeLoader,
-    "dota2": Dota2Loader,
     "multiple": MutipleLoader,
-    "nike": NRCLoader,
-    "notion": NotionLoader,
-    "garmin": GarminLoader,
     "forest": ForestLoader,
     "json": JsonLoader,
-    "jike": JikeLoader,
     "summary": SummaryLoader,
 }
 
