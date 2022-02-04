@@ -35,7 +35,7 @@ setup(
     name="github_poster",
     author="glennzhou",
     author_email="xiaogang19891001@gmail.com",
-    url="https://github.com/goldenages1989/GitHubPoster",
+    url="https://github.com/goldenages1989/2022",
     license="MIT",
     version="2.0.0",
     description="Make everything a GitHub svg poster and Skyline!",
