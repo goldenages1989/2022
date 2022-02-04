@@ -33,9 +33,9 @@ for line in requirements:
 
 setup(
     name="github_poster",
-    author="yihong0618",
-    author_email="zouzou0208@gmail.com",
-    url="https://github.com/yihong0618/GitHubPoster",
+    author="glennzhou",
+    author_email="xiaogang19891001@gmail.com",
+    url="https://github.com/goldenages1989/GitHubPoster",
     license="MIT",
     version="2.0.0",
     description="Make everything a GitHub svg poster and Skyline!",
