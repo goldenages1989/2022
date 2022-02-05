@@ -33,7 +33,7 @@ for line in requirements:
 
 setup(
     name="github_poster",
-    author="glennzhou",
+    author="goldenages1989",
     author_email="xiaogang19891001@gmail.com",
     url="https://github.com/goldenages1989/2022",
     license="MIT",
