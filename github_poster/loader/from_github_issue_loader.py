@@ -40,7 +40,7 @@ class GitHubIssuesLoader(BaseLoader):
     def __map_func(comment):
         data = comment.body.splitlines()[0]
         try:
-            return int(data)
+            return 1
         except (ValueError, TypeError):
             return 0
 
