@@ -51,7 +51,7 @@ jobs:
       - name: Run sync kindle script
         if: contains(env.TYPE, 'kindle')
         run: |
-          python -m github_poster kindle --kindle_cookie  '${{ secrets.KINDLE_COOKIE }} --year=2021-2022 --me ${{ env.ME }}
+          python -m github_poster kindle --kindle_cookie  "${{ secrets.KINDLE_COOKIE }}" --year=2021-2022 --me ${{ env.ME }}
 
       - name: Run sync forest script
         if: contains(env.TYPE, 'forest')
