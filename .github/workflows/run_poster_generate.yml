@@ -9,7 +9,7 @@ env:
   # please change to your own config.
   # this actions generate only this year
   # If you fork this please change the type to yours below
-  TYPE: "issue, github, pass" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/twitter/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
+  TYPE: "issue, kindle, forest" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/twitter/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
   ME: Goldenages1989
   GITHUB_NAME: goldenages1989
   GITHUB_EMAIL: xiaogang19891001@gmail.com
@@ -47,7 +47,17 @@ jobs:
         if: contains(env.TYPE, 'issue')
         run: |
           python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }}
-          
+        
+      - name: Run sync kindle script
+        if: contains(env.TYPE, 'kindle')
+        run: |
+          python -m github_poster kindle --kindle_cookie  '${{ secrets.KINDLE_COOKIE }} --me ${{ env.ME }}
+
+      - name: Run sync forest script
+        if: contains(env.TYPE, 'forest')
+        run: |
+          python -m github_poster forest --forest_email ${{ secrets.FOREST_EMAIL }} --forest_password ${{ secrets.FOREST_PASSWORD }} --year 2022
+
       - name: Mv svg files to examples
         # only for me to show
         if: github.repository_owner == 'goldenages1989'
