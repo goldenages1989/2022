@@ -47,6 +47,21 @@ jobs:
         if: contains(env.TYPE, 'issue')
         run: |
           python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }}
+
+      - name: Run sync issue_diet script
+        if: contains(env.TYPE, 'issue')
+        run: |
+          python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER_DIET }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }}
+
+      - name: Run sync issue_stretch script
+        if: contains(env.TYPE, 'issue')
+        run: |
+          python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER_STRETCH }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }}
+
+      - name: Run sync issue_pomodoro script
+        if: contains(env.TYPE, 'issue')
+        run: |
+          python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER_POMODORO }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }}
         
       - name: Run sync forest script
         if: contains(env.TYPE, 'forest')
