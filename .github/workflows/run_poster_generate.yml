@@ -64,7 +64,7 @@ jobs:
         run: mv OUT_FOLDER/*.svg examples/
 
       - name: Push new svg posters
-        uses: github-actions-x/commit@v2.6
+        uses: github-actions-x/commit@v2.9
         with:
           github-token: ${{ secrets.G_T }}
           commit-message: "Make new poster"
