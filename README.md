@@ -6,10 +6,6 @@
 ![](https://github.com/goldenages1989/2022/blob/main/examples/issue_goldenages1989_InchAlong_1.svg)
 
 
-## 轻断食记录
-![](https://github.com/goldenages1989/2022/blob/main/examples/issue_goldenages1989_InchAlong_9.svg)
-
-
 ## Stretch记录
 ![](https://github.com/goldenages1989/2022/blob/main/examples/issue_goldenages1989_InchAlong_2.svg)
 
@@ -20,10 +16,6 @@
 
 ## 每天看书
 ![](https://raw.githubusercontent.com/goldenages1989/2022/main/examples/kindle.svg)
-
-
-## 专注思考
-![](https://raw.githubusercontent.com/goldenages1989/2022/main/examples/forest.svg)
 
 
 
