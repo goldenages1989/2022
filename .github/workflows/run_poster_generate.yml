@@ -61,7 +61,7 @@ jobs:
       - name: Run sync issue_pomodoro script
         if: contains(env.TYPE, 'issue')
         run: |
-          python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER_POMODORO }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }} --special-number1 6 --special-number2 10 --special-color1 yellow --special-color2 red --track-color '#f4cccc'
+          python -m github_poster issue --issue_number ${{ secrets.ISSUE_NUMBER_POMODORO }} --repo_name ${{ secrets.REPO_NAME }} --github_token ${{ secrets.G_T }} --me ${{ env.ME }} --special-number1 5 --special-number2 8 --special-color1 '#9999ff' --special-color2 '#ff3800' --track-color '#f4cccc'
         
       - name: Run sync forest script
         if: contains(env.TYPE, 'forest')
