@@ -150,7 +150,12 @@ class Drawer:
             -start_date_weekday
         )
         year_length = self.poster.total_sum_year_dict.get(year, 0)
-        year_length = str(int(year_length)) + f" {self.poster.units}"
+        year_units = self.poster.units
+        if self.poster.units == "mins":
+            year_length = int(year_length / 60)
+            # change to hours from mins
+            year_units = "hours"
+        year_length = str(int(year_length)) + f" {year_units}"
         dr.add(
             dr.text(
                 f"{year}" if _type is None else f"{_type}",
@@ -246,6 +251,7 @@ class Drawer:
         else:
             for year in range(self.poster.years[0], self.poster.years[-1] + 1)[::-1]:
                 self._draw_one_calendar(dr, year, offset)
+        print(f"{str(self.poster.type_list)} poster drawer done in `OUT_FOLDER`")
 
     def draw_footer(self, dr):
         text_color = self.poster.colors["text"]

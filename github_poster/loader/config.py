@@ -5,7 +5,7 @@ TIME_ZONE = "Asia/Shanghai"
 
 # shanbay -- no need to login
 SHANBAY_CALENDAR_API = (
-    "https://apiv3.shanbay.com/uc/checkin/calendar/dates/"
+    "https://apiv3.shanbay.com/uc/checkin/calendar/dates"
     "?user_id={user_name}&start_date={start_date}&end_date={end_date}"
 )
 
@@ -84,9 +84,15 @@ NIKE_BASE_URL = "https://api.nike.com/sport/v3/me"
 
 # forest(need to login)
 FOREST_URL_HEAD = "https://forest.dc.upwardsware.com"
+FOREST_CN_URL_HEAD = "https://forest-china.upwardsware.com"
 FOREST_LOGIN_URL = FOREST_URL_HEAD + "/api/v1/sessions"
 FOREST_CLAENDAR_URL = (
     FOREST_URL_HEAD
+    + "/api/v1/plants/updated_plants?update_since={date}&seekruid={user_id}"
+)
+FOREST_CN_LOGIN_URL = FOREST_CN_URL_HEAD + "/api/v1/sessions"
+FOREST_CN_CLAENDAR_URL = (
+    FOREST_CN_URL_HEAD
     + "/api/v1/plants/updated_plants?update_since={date}&seekruid={user_id}"
 )
 
@@ -100,3 +106,12 @@ BBDC_API_URL = "https://learnywhere.cn/bb/dashboard/profile/search?userId={user_
 # Notion
 NOTION_API_URL = "https://api.notion.com/v1/databases/{database_id}/query"
 NOTION_API_VERSION = "2021-08-16"
+
+# Weread
+WEREAD_BASE_URL = "https://weread.qq.com/"
+WEREAD_HISTORY_URL = (
+    "https://i.weread.qq.com/readdetail?baseTimestamp=0&count=32&type=1"
+)
+
+# COVID
+COVID_API = "https://pomber.github.io/covid19/timeseries.json"

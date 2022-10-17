@@ -1,6 +1,5 @@
 import json
 import time
-from http.cookies import SimpleCookie
 from random import randint
 from re import compile
 
@@ -49,6 +48,7 @@ class JikeLoader(BaseLoader):
             "--jike_user_id",
             dest="user_id",
             type=str,
+            required=optional,
             help="The user id of jike",
         )
         parser.add_argument(
@@ -69,18 +69,6 @@ class JikeLoader(BaseLoader):
             such as 'like' or 'comment' or 'repost' or 'share'
             """,
         )
-
-    def _parse_jike_cookie(self):
-        cookie = SimpleCookie()
-        cookie.load(self.jike_cookie)
-        cookies_dict = {}
-        cookiejar = None
-        for key, morsel in cookie.items():
-            cookies_dict[key] = morsel.value
-            cookiejar = requests.utils.cookiejar_from_dict(
-                cookies_dict, cookiejar=None, overwrite=True
-            )
-        return cookiejar
 
     def _get_first_last_id(self):
         """
@@ -162,9 +150,13 @@ class JikeLoader(BaseLoader):
                 }
             """,
         }
+
         # set lastId
-        payload_data["variables"]["loadMoreKey"]["lastId"] = last_id
         payload_data["variables"]["username"] = self.user_id
+        if not last_id:
+            payload_data["variables"]["loadMoreKey"] = None
+        else:
+            payload_data["variables"]["loadMoreKey"]["lastId"] = last_id
 
         r = self.session.post(
             JIKE_GRAPHQL_URL, headers=self.headers, data=json.dumps(payload_data)
@@ -191,17 +183,10 @@ class JikeLoader(BaseLoader):
 
     def get_api_data(self):
         data_cache = []
-        # get first last id and first data
-        first_last_id, first_data_dict = self._get_first_last_id()
-        if not first_last_id:
-            raise LoadError("Can not get first last id, please check your cookie")
-        if self._check_if_stop(first_data_dict.keys()):
-            return data_cache
-        else:
-            # do post get more
-            post_resp_dates = self._request_post_data(first_last_id)
-            data_cache.extend(post_resp_dates)
-            return data_cache, first_data_dict
+        first_last_id, first_data_dict = "", {}
+        post_resp_dates = self._request_post_data(first_last_id)
+        data_cache.extend(post_resp_dates)
+        return data_cache, first_data_dict
 
     def make_track_dict(self):
         data_list, first_data_dict = self.get_api_data()
@@ -222,7 +207,7 @@ class JikeLoader(BaseLoader):
             self.number_list.append(v)
 
     def get_all_track_data(self):
-        self.session.cookies = self._parse_jike_cookie()
+        self.session.cookies = self.parse_cookie_string(self.jike_cookie)
         self.make_track_dict()
         self.make_special_number()
         print("Thanks for being addicted to jike.")

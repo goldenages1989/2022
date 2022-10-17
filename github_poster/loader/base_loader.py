@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from datetime import datetime
+from http.cookies import SimpleCookie
 
 import pendulum
-import pytz
+from requests.utils import cookiejar_from_dict
 
 from github_poster.loader.config import TIME_ZONE
 
@@ -31,6 +32,11 @@ class BaseLoader(ABC):
         self.special_number2 = None
         self.number_list = []
         self.year_list = self._make_years_list()
+        self.try_import_deps()
+
+    @classmethod
+    def try_import_deps(cls):
+        pass
 
     def _make_years_list(self):
         return list(range(int(self.from_year), int(self.to_year) + 1))
@@ -64,8 +70,21 @@ class BaseLoader(ABC):
             self.special_number2 = number_list_set[-1 * int(number_list_set_len * 0.50)]
 
     def adjust_time(self, time):
-        tc_offset = datetime.now(pytz.timezone(self.time_zone)).utcoffset()
+        tc_offset = datetime.now(pendulum.timezone(self.time_zone)).utcoffset()
         return time + tc_offset
+
+    @staticmethod
+    def parse_cookie_string(cookie_string):
+        cookie = SimpleCookie()
+        cookie.load(cookie_string)
+        cookies_dict = {}
+        cookiejar = None
+        for key, morsel in cookie.items():
+            cookies_dict[key] = morsel.value
+            cookiejar = cookiejar_from_dict(
+                cookies_dict, cookiejar=None, overwrite=True
+            )
+        return cookiejar
 
     @classmethod
     def add_arguments(cls, parser, optional):
@@ -193,6 +212,13 @@ class BaseLoader(ABC):
             dest="cn",
             action="store_true",
             help="if accout is CN",
+        )
+        # special here
+        group.add_argument(
+            "--stand-with-ukraine",
+            dest="stand_with_ukraine",
+            action="store_true",
+            help="Stand with Ukraine Special color",
         )
 
     @classmethod

@@ -4,19 +4,20 @@
 
 import argparse
 import os
+import sys
 
 from github_poster.circluar_drawer import CircularDrawer
 from github_poster.config import TYPE_INFO_DICT
 from github_poster.drawer import Drawer
+from github_poster.err import DepNotInstalledError
 from github_poster.loader import LOADER_DICT
 from github_poster.poster import Poster
-from github_poster.skyline import Skyline
 from github_poster.utils import parse_years
 
 OUT_FOLDER = os.path.join(os.getcwd(), "OUT_FOLDER")
 
 
-def main():
+def run():
     """Handle command line arguments and call other modules as needed."""
     p = Poster()
     args_parser = argparse.ArgumentParser()
@@ -43,12 +44,19 @@ def main():
 
     p.colors = {
         "background": args.background_color,
-        "track": args.loader.track_color  # some type has default color
-        or args.track_color,
+        "track": args.track_color
+        or args.loader.track_color,  # some type has default color
         "special": args.special_color1,
         "special2": args.special_color2 or args.special_color,
         "text": args.text_color,
     }
+
+    # if special color (Stand with Ukraine) change the color
+    if args.stand_with_ukraine:
+        p.colors["track"] = "#025DB8"
+        p.colors["special"] = "#FFD100"
+        p.colors["special2"] = "#FFD100"
+
     # set animate
     p.set_with_animation(args.with_animation)
     p.set_animation_time(args.animation_time)
@@ -133,6 +141,14 @@ def main():
 
     # generate skyline
     if args.with_skyline:
+        try:
+            from github_poster.skyline import Skyline
+        except ImportError:
+            raise DepNotInstalledError(
+                "Skyline dependencies are not installed, "
+                "please use `pip3 install -U 'github_poster[skyline]'` to install."
+            )
+
         if args.skyline_year:
             year = args.skyline_year
         else:
@@ -151,6 +167,13 @@ def main():
         )
         s.type_info_dict = TYPE_INFO_DICT
         s.make_skyline()
+
+
+def main():
+    try:
+        run()
+    except DepNotInstalledError as e:
+        print(e, file=sys.stderr)
 
 
 if __name__ == "__main__":

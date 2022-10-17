@@ -44,4 +44,6 @@ TYPE_INFO_DICT = {
     "forest": "Forest",
     "jike": "Jike",
     "bbdc": "BBDC",
+    "weread": "WeRead",
+    "covid": "COVID-19",
 }

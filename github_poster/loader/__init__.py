@@ -1,6 +1,7 @@
 from github_poster.loader.bbdc_loader import BBDCLoader
 from github_poster.loader.bilibili_loader import BilibiliLoader
 from github_poster.loader.cichang_loader import CiChangLoader
+from github_poster.loader.covid_loader import CovidLoader
 from github_poster.loader.dota2_loader import Dota2Loader
 from github_poster.loader.duolingo_loader import DuolingoLoader
 from github_poster.loader.forest_loader import ForestLoader
@@ -13,13 +14,14 @@ from github_poster.loader.jike_loader import JikeLoader
 from github_poster.loader.json_loader import JsonLoader
 from github_poster.loader.kindle_loader import KindleLoader
 from github_poster.loader.leetcode_loader import LeetcodeLoader
-from github_poster.loader.multiple_loader import MutipleLoader
+from github_poster.loader.multiple_loader import MultipleLoader
 from github_poster.loader.notion_loader import NotionLoader
 from github_poster.loader.shanbay_loader import ShanBayLoader
 from github_poster.loader.strava_loader import StravaLoader
 from github_poster.loader.summary_loader import SummaryLoader
 from github_poster.loader.twitter_loader import TwitterLoader
 from github_poster.loader.wakatime_loader import WakaTimeLoader
+from github_poster.loader.weread_loader import WereadLoader
 from github_poster.loader.youtube_loader import YouTubeLoader
 
 LOADER_DICT = {
@@ -29,10 +31,16 @@ LOADER_DICT = {
     "github": GitHubLoader,
     "kindle": KindleLoader,
     "wakatime": WakaTimeLoader,
-    "multiple": MutipleLoader,
+    "dota2": Dota2Loader,
+    "multiple": MultipleLoader,
+    "nike": NRCLoader,
+    "notion": NotionLoader,
+    "garmin": GarminLoader,
     "forest": ForestLoader,
     "json": JsonLoader,
     "summary": SummaryLoader,
+    "weread": WereadLoader,
+    "covid": CovidLoader,
 }
 
 __all__ = (
@@ -52,7 +60,7 @@ __all__ = (
     "TwitterLoader",
     "WakaTimeLoader",
     "YouTubeLoader",
-    "MutipleLoader",
+    "MultipleLoader",
     "NotionLoader",
     "NRCLoader",
     "LOADER_DICT",
@@ -62,4 +70,6 @@ __all__ = (
     "JikeLoader",
     "SummaryLoader",
     "BBDCLoader",
+    "WereadLoader",
+    "CovidLoader",
 )
